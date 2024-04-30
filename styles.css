@@ -1,0 +1,19 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  color: green;
+}
+
+.book-form {
+  display: none;
+}
+
+.bookGrid {
+  width: 1000px;
+  height: 1000px;
+  border: 2px green solid;
+  display: flex;
+  flex-wrap: wrap;
+}
