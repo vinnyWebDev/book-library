@@ -1,8 +1,12 @@
-/*Where I am at.
-Add a checkbox option for isread. If book is read, display in green , otherwise some neutral colour. #
-A user should be able to ammend this after book creation if they read the book. 
+/*
+  Missing functionality:
+  A toggle read button on the card which actually works
+    I mean realistically there has to be a boolean isRead vallue on the onject contructor right?
+  A functioning delete button which deletes the book from the array
 
-Go back to the test file you made and figure it out there*/
+  When all the functionality is there, I would like to start the whole thing from scratch and build it back tideier.
+  Styling would follow. 
+*/
 
 //library array
 const library = [];
@@ -55,6 +59,11 @@ formBtn.addEventListener("click", (e) => {
   for (i = 0; i < library.length; i++) {
     //We make a new card with each itteration
     const bookCard = document.createElement("div");
+    const toggleRead = document.createElement("input");
+    toggleRead.type = "checkbox";
+    toggleRead.id = "toggleRead";
+
+    const label = document.createElement("button");
 
     //rendering our book data as card content
     bookCard.textContent =
@@ -67,6 +76,7 @@ formBtn.addEventListener("click", (e) => {
       "Read:" +
       library[i].isRead;
 
+    label.addEventListener("click", () => {});
     //changes status of whether book is read changes card colour. It should be possible for the user to ammend this after book creation
     if (library[i].isRead == true) {
       bookCard.style.cssText =
@@ -77,5 +87,10 @@ formBtn.addEventListener("click", (e) => {
     }
     //appending our newly made book card to the book grid
     bookGrid.appendChild(bookCard);
+    label.htmlFor = "toggleRead";
+    label.appendChild(document.createTextNode("Toggle Read"));
+
+    bookCard.appendChild(label);
+    bookCard.appendChild(toggleRead);
   }
 });
