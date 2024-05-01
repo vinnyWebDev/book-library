@@ -27,6 +27,78 @@ function addToLibrary(book) {
   library.push(book);
 }
 
+//render book
+function renderCard(book) {
+  const bookCard = document.createElement("div");
+  const toggleRead = document.createElement("button");
+
+  bookCard.textContent =
+    "Title:" +
+    book.title +
+    " Author: " +
+    book.author +
+    " Pages: " +
+    book.pages +
+    "Read:" +
+    book.isRead;
+
+  bookCard.appendChild(toggleRead);
+
+  toggleRead.addEventListener("click", () => {
+    //changes status of whether book is read changes card colour. It should be possible for the user to ammend this after book creation
+    if (book.isRead == true) {
+      book.isRead = false;
+    } else {
+      book.isRead = true;
+    }
+    //changes status of whether book is read changes card colour. It should be possible for the user to ammend this after book creation
+    if (book.isRead == true) {
+      bookCard.textContent =
+        "Title:" +
+        book.title +
+        " Author: " +
+        book.author +
+        " Pages: " +
+        book.pages +
+        "Read:" +
+        book.isRead;
+
+      bookCard.appendChild(toggleRead);
+      bookCard.style.cssText =
+        "background-color: green; border: 2px solid black; width: 150px; height: 100px; margin: 20px; padding: 20px";
+    } else {
+      bookCard.textContent =
+        "Title:" +
+        book.title +
+        " Author: " +
+        book.author +
+        " Pages: " +
+        book.pages +
+        "Read:" +
+        book.isRead;
+
+      bookCard.appendChild(toggleRead);
+      bookCard.style.cssText =
+        "background-color: pink; border: 2px solid black; width: 150px; height: 100px; margin: 20px; padding: 20px";
+    }
+    console.log(book);
+  });
+
+  //appending our newly made book card to the book grid
+  toggleRead.htmlFor = "toggleRead";
+  toggleRead.appendChild(document.createTextNode("Toggle Read"));
+  //changes status of whether book is read changes card colour. It should be possible for the user to ammend this after book creation
+  if (book.isRead == true) {
+    bookCard.style.cssText =
+      "background-color: green; border: 2px solid black; width: 150px; height: 100px; margin: 20px; padding: 20px";
+  } else {
+    bookCard.style.cssText =
+      "background-color: pink; border: 2px solid black; width: 150px; height: 100px; margin: 20px; padding: 20px";
+  }
+
+  bookGrid.appendChild(bookCard);
+}
+
 //form code
 newBookBtn.addEventListener("click", () => {
   if (bookForm.style.display === "none") {
@@ -56,41 +128,9 @@ formBtn.addEventListener("click", (e) => {
   //I'm clearing the div each time so content doesn't double up
   bookGrid.textContent = "";
 
-  for (i = 0; i < library.length; i++) {
+  for (let i = 0; i < library.length; i++) {
     //We make a new card with each itteration
-    const bookCard = document.createElement("div");
-    const toggleRead = document.createElement("input");
-    toggleRead.type = "checkbox";
-    toggleRead.id = "toggleRead";
 
-    const label = document.createElement("button");
-
-    //rendering our book data as card content
-    bookCard.textContent =
-      "Title:" +
-      library[i].title +
-      " Author: " +
-      library[i].author +
-      " Pages: " +
-      library[i].pages +
-      "Read:" +
-      library[i].isRead;
-
-    label.addEventListener("click", () => {});
-    //changes status of whether book is read changes card colour. It should be possible for the user to ammend this after book creation
-    if (library[i].isRead == true) {
-      bookCard.style.cssText =
-        "background-color: green; border: 2px solid black; width: 150px; height: 100px; margin: 20px; padding: 20px";
-    } else {
-      bookCard.style.cssText =
-        "background-color: pink; border: 2px solid black; width: 150px; height: 100px; margin: 20px; padding: 20px";
-    }
-    //appending our newly made book card to the book grid
-    bookGrid.appendChild(bookCard);
-    label.htmlFor = "toggleRead";
-    label.appendChild(document.createTextNode("Toggle Read"));
-
-    bookCard.appendChild(label);
-    bookCard.appendChild(toggleRead);
+    renderCard(library[i]);
   }
 });
